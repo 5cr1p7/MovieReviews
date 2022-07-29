@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">MovieReviews</string>
+    <string name="network_error">Ошибка загрузки, проверьте настройки сети</string>
 </resources>
