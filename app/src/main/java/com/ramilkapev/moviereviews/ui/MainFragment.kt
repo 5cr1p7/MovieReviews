@@ -44,7 +44,7 @@ class MainFragment : Fragment() {
         with(binding.rvMovies) {
             val orientation = RecyclerView.VERTICAL
             binding.rvMovies.adapter =
-                moviesAdapter.withLoadStateFooter(MoviesLoaderStateAdapter())
+                moviesAdapter.withLoadStateFooter(MoviesLoaderStateAdapter(moviesAdapter))
             layoutManager = LinearLayoutManager(context, orientation, false)
             addItemDecoration(DividerItemDecoration(context, orientation))
         }
@@ -56,7 +56,7 @@ class MainFragment : Fragment() {
         }
 
         binding.btnRefresh.setOnClickListener {
-            mainViewModel.getMovies()
+            moviesAdapter.retry()
         }
 
         moviesAdapter.addLoadStateListener { state: CombinedLoadStates ->
@@ -67,6 +67,9 @@ class MainFragment : Fragment() {
             if (refreshState is LoadState.Error) {
                 binding.btnRefresh.isVisible = true
                 binding.txvError.isVisible = true
+            } else {
+                binding.btnRefresh.isVisible = false
+                binding.txvError.isVisible = false
             }
         }
     }

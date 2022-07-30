@@ -1,8 +1,8 @@
-package com.ramilkapev.moviereviews
+package com.ramilkapev.moviereviews.data
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.ramilkapev.moviereviews.data.MoviesService
+import com.ramilkapev.moviereviews.BuildConfig
 import com.ramilkapev.moviereviews.domain.models.Result
 import retrofit2.HttpException
 import java.io.IOException
@@ -22,7 +22,7 @@ class MoviesPagingSource(
         return try {
             val pageNumber = params.key ?: 0
 
-            val response = service.getMovies(pageNumber, AuthConfig.API_KEY)
+            val response = service.getMovies(pageNumber, BuildConfig.API_KEY)
 
             val prevKey = if (pageNumber > 0) pageNumber - 1 else null
 

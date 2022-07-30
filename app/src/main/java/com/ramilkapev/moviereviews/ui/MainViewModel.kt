@@ -3,7 +3,6 @@ package com.ramilkapev.moviereviews.ui
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
-import com.ramilkapev.moviereviews.AuthConfig
 import com.ramilkapev.moviereviews.domain.models.Result
 import com.ramilkapev.moviereviews.domain.repositories.MoviesRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -29,7 +28,7 @@ class MainViewModel @Inject constructor(
 
         currentSearchJob = viewModelScope.launch {
             runCatching {
-                repository.getMoviesFlow(AuthConfig.API_KEY)
+                repository.getMoviesFlow()
             }.onSuccess {
                 _moviesFlow = it
             }

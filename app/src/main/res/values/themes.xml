@@ -15,7 +15,7 @@
     </style>
 
     <style name="Theme.AppCompat.Launcher" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="android:windowBackground">@drawable/placeholder</item>
+        <item name="android:windowBackground">@drawable/launch_screen</item>
         <item name="colorPrimaryDark">@android:color/white</item>
     </style>
 </resources>

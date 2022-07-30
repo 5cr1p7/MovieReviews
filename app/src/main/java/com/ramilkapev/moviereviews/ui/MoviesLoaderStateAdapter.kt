@@ -9,7 +9,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ramilkapev.moviereviews.databinding.ItemErrorBinding
 import com.ramilkapev.moviereviews.databinding.ItemProgressBinding
 
-class MoviesLoaderStateAdapter() : LoadStateAdapter<MoviesLoaderStateAdapter.ItemViewHolder>() {
+class MoviesLoaderStateAdapter(
+    private val adapter: MoviesAdapter
+) : LoadStateAdapter<MoviesLoaderStateAdapter.ItemViewHolder>() {
 
     override fun getStateViewType(loadState: LoadState) = when (loadState) {
         is LoadState.NotLoading -> error("Not supported")
@@ -24,7 +26,9 @@ class MoviesLoaderStateAdapter() : LoadStateAdapter<MoviesLoaderStateAdapter.Ite
     override fun onCreateViewHolder(parent: ViewGroup, loadState: LoadState): ItemViewHolder {
         return when (loadState) {
             LoadState.Loading -> ProgressViewHolder(LayoutInflater.from(parent.context), parent)
-            is LoadState.Error -> ErrorViewHolder(LayoutInflater.from(parent.context), parent)
+            is LoadState.Error -> ErrorViewHolder(LayoutInflater.from(parent.context), parent) {
+                adapter.retry()
+            }
             is LoadState.NotLoading -> error("Not supported")
         }
     }
@@ -45,7 +49,6 @@ class MoviesLoaderStateAdapter() : LoadStateAdapter<MoviesLoaderStateAdapter.Ite
     ) : ItemViewHolder(binding.root) {
 
         override fun bind(loadState: LoadState) {
-            // Do nothing
         }
 
         companion object {
@@ -67,12 +70,16 @@ class MoviesLoaderStateAdapter() : LoadStateAdapter<MoviesLoaderStateAdapter.Ite
     }
 
     class ErrorViewHolder internal constructor(
-        private val binding: ItemErrorBinding
+        private val binding: ItemErrorBinding,
+        private val retryCallback: () -> Unit
     ) : ItemViewHolder(binding.root) {
 
         override fun bind(loadState: LoadState) {
             require(loadState is LoadState.Error)
             binding.errorMessage.text = loadState.error.localizedMessage
+            binding.btnRetry.setOnClickListener {
+                retryCallback()
+            }
         }
 
         companion object {
@@ -80,7 +87,8 @@ class MoviesLoaderStateAdapter() : LoadStateAdapter<MoviesLoaderStateAdapter.Ite
             operator fun invoke(
                 layoutInflater: LayoutInflater,
                 parent: ViewGroup? = null,
-                attachToRoot: Boolean = false
+                attachToRoot: Boolean = false,
+                retryCallback: () -> Unit
             ): ErrorViewHolder {
                 return ErrorViewHolder(
                     ItemErrorBinding.inflate(
@@ -88,7 +96,9 @@ class MoviesLoaderStateAdapter() : LoadStateAdapter<MoviesLoaderStateAdapter.Ite
                         parent,
                         attachToRoot
                     )
-                )
+                ) {
+                    retryCallback()
+                }
             }
         }
     }
