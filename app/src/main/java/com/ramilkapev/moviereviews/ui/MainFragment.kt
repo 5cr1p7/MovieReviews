@@ -1,5 +1,6 @@
 package com.ramilkapev.moviereviews.ui
 
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +12,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.paging.CombinedLoadStates
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ramilkapev.moviereviews.databinding.FragmentMainBinding
@@ -43,10 +45,15 @@ class MainFragment : Fragment() {
 
         with(binding.rvMovies) {
             val orientation = RecyclerView.VERTICAL
+            val screenOrientation = resources.configuration.orientation
             binding.rvMovies.adapter =
                 moviesAdapter.withLoadStateFooter(MoviesLoaderStateAdapter(moviesAdapter))
-            layoutManager = LinearLayoutManager(context, orientation, false)
-            addItemDecoration(DividerItemDecoration(context, orientation))
+            if (screenOrientation == Configuration.ORIENTATION_PORTRAIT) {
+                layoutManager = LinearLayoutManager(context, orientation, false)
+                addItemDecoration(DividerItemDecoration(context, orientation))
+            } else if (screenOrientation == Configuration.ORIENTATION_LANDSCAPE) {
+                layoutManager = GridLayoutManager(context, 2)
+            }
         }
 
         mainViewModel.getMovies()
