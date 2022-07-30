@@ -6,6 +6,8 @@ Android Application with movie reviews using API from NY Times (https://develope
 - MVVM
 - Kotlin
 - Kotlin Coroutines
+- Hilt
+- Paging 3
 - ViewBinding
 - Single Activity
 - Retrofit
