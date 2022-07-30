@@ -13,6 +13,6 @@ Android Application with movie reviews using API from NY Times (https://develope
 
 ## Screenshots
 
-<img alt="MainScreenWithInternetPortraitMobile" src="https://github.com/5cr1p7/ImagesGallery/blob/master/MainScreenWithInternetPortraitMobile.png" width="275" height="500"/>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<img alt="MainScreenWithoutInternet" src="https://github.com/5cr1p7/ImagesGallery/blob/master//MainScreenWithoutInternet.png" width="275" height="500"/>
-<br/><br/><img alt="MainScreenWithInternetLandscapeMobile" src="https://github.com/5cr1p7/ImagesGallery/blob/master/MainScreenWithInternetLandscapeMobile.png" width="500" height="275"/>
+<img alt="MainScreenWithInternetPortraitMobile" src="https://github.com/5cr1p7/MovieReviews/blob/master/MainScreenWithInternetPortraitMobile.png" width="275" height="500"/>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<img alt="MainScreenWithoutInternet" src="https://github.com/5cr1p7/MovieReviews/blob/master//MainScreenWithoutInternet.png" width="275" height="500"/>
+<br/><br/><img alt="MainScreenWithInternetLandscapeMobile" src="https://github.com/5cr1p7/MovieReviews/blob/master/MainScreenWithInternetLandscapeMobile.png" width="500" height="275"/>
 <br/><br/>
